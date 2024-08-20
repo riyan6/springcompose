@@ -4,6 +4,7 @@ import cn.hutool.core.text.AntPathMatcher;
 import cn.hutool.core.util.StrUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.spring.compose.common.constants.OrderConstant;
 import org.spring.compose.common.exception.BizException;
 import org.spring.compose.web.annotation.IgnoreAuthorization;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.lang.reflect.Method;
 
+@Slf4j
 @ConditionalOnExpression("${compose.web.authInterceptorEnable:false}")
 @Order(OrderConstant.AUTH_INTERCEPTOR_ORDER)
 public class AuthInterceptor implements HandlerInterceptor, WebMvcConfigurer {
@@ -32,6 +34,9 @@ public class AuthInterceptor implements HandlerInterceptor, WebMvcConfigurer {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 获取请求路径
         String path = getPath(request);
+
+        log.info("请求路径：%s".formatted(path));
+
         // 如果方法类型是 option 或者是错误链接 就放行
         if (HttpMethod.OPTIONS.name().equals(request.getMethod()) || path.equals(ERROR_URL)) {
             return HandlerInterceptor.super.preHandle(request, response, handler);

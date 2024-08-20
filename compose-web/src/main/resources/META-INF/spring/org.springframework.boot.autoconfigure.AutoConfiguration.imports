@@ -3,4 +3,3 @@ org.spring.compose.web.config.ComposeWebConfig
 org.spring.compose.web.config.OpenApiConfig
 org.spring.compose.web.exception.GlobalExceptionHandler
 org.spring.compose.web.SpringComposeWebApp
-org.spring.compose.web.interceptor.AuthInterceptor

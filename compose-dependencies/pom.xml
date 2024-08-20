@@ -141,6 +141,11 @@
                 <artifactId>mybatis</artifactId>
                 <version>${bom.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.spring.compose</groupId>
+                <artifactId>security</artifactId>
+                <version>${bom.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

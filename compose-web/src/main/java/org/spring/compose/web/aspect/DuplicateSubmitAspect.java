@@ -10,8 +10,10 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.spring.compose.common.exception.BizException;
+import org.spring.compose.common.model.user.AuthUser;
 import org.spring.compose.common.out.result.ResultCode;
 import org.spring.compose.web.annotation.PreventDuplicateResubmit;
+import org.spring.compose.web.util.UserUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -35,12 +37,12 @@ public class DuplicateSubmitAspect {
     @Around("preventDuplicateSubmitPointCut(preventDuplicateResubmit)")
     public Object aroundExecute(ProceedingJoinPoint joinPoint, PreventDuplicateResubmit preventDuplicateResubmit) throws Throwable {
         var request = getRequest();
-        // todo: 获取用户id
-        long uid = 10066993;
+        //获取用户信息
+        var authUser = UserUtil.CurrentUser.get();
 
         // 拼接key
         String lockKey = new StringBuffer(RESUBMIT_LOCK_PREFIX)
-                .append(uid)
+                .append(authUser.getId())
                 .append(":")
                 .append(request.getMethod())
                 .append("-")
