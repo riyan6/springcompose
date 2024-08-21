@@ -1,2 +1,3 @@
 org.spring.compose.redis.config.RedisConfig
 org.spring.compose.redis.config.RedisCacheConfig
+org.spring.compose.redis.aspect.DuplicateSubmitAspect

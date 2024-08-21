@@ -9,9 +9,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.util.Properties;
 
 /**
- * 封装启动类
+ * <p>封装的SpringBoot启动类，默认配置开启虚拟线程</p>
  *
  * @author riyan6
+ * @since 2024-04-17
  */
 @Slf4j
 public class SpringComposeWebApp implements CommandLineRunner {
@@ -42,6 +43,6 @@ public class SpringComposeWebApp implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         var docUrl = "http://127.0.0.1:%s/doc.html".formatted(this.port);
-        log.info("Web应用启动成功，虚拟线程已启用，APi文档访问地址：%s".formatted(docUrl));
+        log.info("WEB应用启动成功，API文档访问地址：{} [虚拟线程已开启]", docUrl);
     }
 }
