@@ -5,13 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.spring.compose</groupId>
-    <artifactId>dependencies</artifactId>
+    <artifactId>compose-dependencies</artifactId>
     <version>${bom.version}</version>
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bom.version>1.0.0</bom.version>
 
@@ -123,27 +121,22 @@
             <!-- 服务 -->
             <dependency>
                 <groupId>org.spring.compose</groupId>
-                <artifactId>common</artifactId>
+                <artifactId>compose-common</artifactId>
                 <version>${bom.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.spring.compose</groupId>
-                <artifactId>web</artifactId>
+                <artifactId>compose-web</artifactId>
                 <version>${bom.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.spring.compose</groupId>
-                <artifactId>redis</artifactId>
+                <artifactId>compose-redis</artifactId>
                 <version>${bom.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.spring.compose</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${bom.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.spring.compose</groupId>
-                <artifactId>security</artifactId>
+                <artifactId>compose-mybatis</artifactId>
                 <version>${bom.version}</version>
             </dependency>
 
