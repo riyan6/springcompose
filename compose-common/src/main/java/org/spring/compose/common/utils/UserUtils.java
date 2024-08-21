@@ -1,11 +1,11 @@
-package org.spring.compose.web.util;
+package org.spring.compose.common.utils;
 
+import cn.hutool.core.lang.Assert;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import lombok.NonNull;
 import org.spring.compose.common.model.user.AuthUser;
-import org.springframework.util.Assert;
 
-public class UserUtil {
+public class UserUtils {
 
     public static class CurrentUser {
         private static final TransmittableThreadLocal<AuthUser> cache = new TransmittableThreadLocal<>();

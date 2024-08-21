@@ -1,6 +1,5 @@
-package org.spring.compose.web.aspect;
+package org.spring.compose.redis.aspect;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,13 +9,10 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.spring.compose.common.exception.BizException;
-import org.spring.compose.common.model.user.AuthUser;
 import org.spring.compose.common.out.result.ResultCode;
-import org.spring.compose.web.annotation.PreventDuplicateResubmit;
-import org.spring.compose.web.util.UserUtil;
+import org.spring.compose.common.utils.UserUtils;
+import org.spring.compose.redis.annotation.PreventDuplicateResubmit;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,17 +32,16 @@ public class DuplicateSubmitAspect {
 
     @Around("preventDuplicateSubmitPointCut(preventDuplicateResubmit)")
     public Object aroundExecute(ProceedingJoinPoint joinPoint, PreventDuplicateResubmit preventDuplicateResubmit) throws Throwable {
-        var request = getRequest();
-        //获取用户信息
-        var authUser = UserUtil.CurrentUser.get();
+        // 获取用户信息
+        var authUser = UserUtils.CurrentUser.get();
 
         // 拼接key
         String lockKey = new StringBuffer(RESUBMIT_LOCK_PREFIX)
                 .append(authUser.getId())
                 .append(":")
-                .append(request.getMethod())
+                .append(preventDuplicateResubmit.method().getValue())
                 .append("-")
-                .append(request.getRequestURI())
+                .append(preventDuplicateResubmit.methodName())
                 .toString();
         int expire = preventDuplicateResubmit.expire();
         RLock lock = redissonClient.getLock(lockKey);
@@ -56,10 +51,6 @@ public class DuplicateSubmitAspect {
             throw new BizException(ResultCode.REPEAT_SUBMIT_ERROR);
         }
         return joinPoint.proceed();
-    }
-
-    private HttpServletRequest getRequest() {
-        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
 }

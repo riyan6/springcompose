@@ -7,9 +7,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.spring.compose.common.constants.OrderConstant;
 import org.spring.compose.common.exception.BizException;
+import org.spring.compose.common.utils.UserUtils;
 import org.spring.compose.web.annotation.IgnoreAuthorization;
 import org.spring.compose.common.model.user.AuthUser;
-import org.spring.compose.web.util.UserUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
@@ -67,7 +67,7 @@ public class AuthInterceptor implements HandlerInterceptor, WebMvcConfigurer {
         }
         // 解析tokenHeader 即jwt解析出用户数据并存储
         AuthUser user = AuthUser.builder().build();
-        UserUtil.CurrentUser.set(user);
+        UserUtils.CurrentUser.set(user);
 
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }

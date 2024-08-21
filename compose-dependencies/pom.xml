@@ -16,7 +16,7 @@
         <bom.version>1.0.0</bom.version>
 
         <!-- spring -->
-        <spring.boot.version>3.2.3</spring.boot.version>
+        <spring.boot.version>3.3.2</spring.boot.version>
         <spring.cloud.version>2023.0.0</spring.cloud.version>
         <spring.cloud.alibaba.version>2023.0.0.0-RC1</spring.cloud.alibaba.version>
 

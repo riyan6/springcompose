@@ -41,11 +41,6 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- ttl -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>transmittable-thread-local</artifactId>
-        </dependency>
         <!-- 接口文档 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
@@ -55,11 +50,6 @@
         <dependency>
             <groupId>org.spring.compose</groupId>
             <artifactId>common</artifactId>
-        </dependency>
-        <!-- redis -->
-        <dependency>
-            <groupId>org.spring.compose</groupId>
-            <artifactId>redis</artifactId>
         </dependency>
     </dependencies>
 
